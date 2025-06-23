@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chinese Stroke Viewer</title>
+  <style>
+    body { font-family: "Noto Serif SC", serif; background: #f8f5f0; color: #2e2e2e; text-align: center; padding-top: 40px; }
+    h1 { font-size: 26px; }
+    .char-btn { font-size: 28px; margin: 10px; padding: 10px 15px; background: #e0d4bd; border: none; border-radius: 6px; cursor: pointer; }
+    #svg-container { width: 300px; height: 300px; margin: 20px auto; }
+    #pinyin { font-size: 22px; color: #666; margin-top: 10px; }
+  </style>
+</head>
+<body>
+  <h1>Click a Character to See Stroke Order</h1>
+  <div id="buttons"></div>
+  <div id="pinyin"></div>
+  <div id="svg-container"></div>
+  <script src="hanzi.js"></script>
+</body>
+</html>
