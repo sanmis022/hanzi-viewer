@@ -1,22 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Hanzi Stroke Viewer</title>
   <style>
-    body {
-      font-family: sans-serif;
-      background: #fdf7f0;
-      text-align: center;
-      padding: 40px;
-    }
-    .char-btn {
-      font-size: 32px;
-      margin: 10px;
-      padding: 10px 20px;
-    }
+    body { font-family: sans-serif; background: #fdf7f0; text-align: center; padding: 40px; }
+    .char-btn { font-size: 32px; margin: 10px; padding: 10px 20px; }
   </style>
-<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@2.1.2/dist/hanziwriter.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
 </head>
 <body>
   <h1>Click a Character to See Stroke Order</h1>
@@ -25,40 +16,30 @@
   <div id="writer" style="width: 300px; height: 300px; margin: 0 auto;"></div>
 
   <script>
-    const pinyinMap = {
-      "你": "nǐ",
-      "好": "hǎo",
-      "永": "yǒng"
-    };
-
+    const pinyinMap = { "你": "nǐ", "好": "hǎo", "永": "yǒng" };
     const characters = Object.keys(pinyinMap);
+    let writer;
 
     function createButtons() {
       const container = document.getElementById("buttons");
-      characters.forEach(char => {
+      characters.forEach(c => {
         const btn = document.createElement("button");
         btn.className = "char-btn";
-        btn.innerText = char;
-        btn.onclick = () => drawCharacter(char);
+        btn.innerText = c;
+        btn.onclick = () => drawCharacter(c);
         container.appendChild(btn);
       });
     }
 
-    let writer;
-
     function drawCharacter(char) {
       document.getElementById("pinyin").innerText = pinyinMap[char];
-
       if (writer) {
         writer.setCharacter(char);
         writer.animateCharacter();
       } else {
         writer = HanziWriter.create('writer', char, {
-          width: 300,
-          height: 300,
-          padding: 5,
-          showOutline: true,
-          showCharacter: false
+          width: 300, height: 300, padding: 5,
+          showOutline: true, showCharacter: false
         });
         writer.animateCharacter();
       }
