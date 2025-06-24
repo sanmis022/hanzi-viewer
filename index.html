@@ -1,33 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Hanzi Viewer</title>
+  <meta charset="UTF-8" />
+  <title>Hanzi Stroke Order</title>
   <style>
     body {
       font-family: sans-serif;
       text-align: center;
-      background: #fdf7f0;
+      background-color: #fdf7f0;
       padding-top: 50px;
     }
     .char-btn {
-      margin: 10px;
       font-size: 32px;
+      margin: 10px;
       padding: 10px 20px;
       cursor: pointer;
     }
   </style>
-  <!-- Load Hanzi Writer from CDN -->
+  <!-- Hanzi Writer via CDN -->
   <script src="https://unpkg.com/hanzi-writer@2.1.2/dist/hanziwriter.min.js"></script>
 </head>
 <body>
-
   <h1>Click a Character to See Stroke Order</h1>
   <div id="buttons"></div>
-  <p id="pinyin"></p>
-  <div id="writer" style="margin-top: 30px;"></div>
+  <p id="pinyin" style="font-size: 24px;"></p>
+  <div id="writer" style="width: 300px; height: 300px; margin: 0 auto;"></div>
 
-  <!-- Your JavaScript file -->
-  <script src="script.js"></script>
+  <script>
+    const pinyinMap = {
+      "你": "nǐ",
+      "好": "hǎo",
+      "永": "yǒng"
+    };
+
+    const characters = Object.keys(pinyinMap);
+
+    function createButtons() {
+      const container = document.getElementById("buttons");
+      characters.forEach(char => {
+        const btn = document.createElement("button");
+        btn.className = "char-btn";
+        btn.innerText = char;
+        btn.onclick = () => drawCharacter(char);
+        container.appendChild(btn);
+      });
+    }
+
+    let writer;
+
+    function drawCharacter(char) {
+      document.getElementById("pinyin").innerText = pinyinMap[char] || "";
+
+      if (writer) writer.hideCharacter();
+      writer = HanziWriter.create('writer', char, {
+        width: 300,
+        height: 300,
+        padding: 5,
+        showOutline: true,
+        showCharacter: false
+      });
+
+      writer.animateCharacter();
+    }
+
+    window.onload = createButtons;
+  </script>
 </body>
 </html>
