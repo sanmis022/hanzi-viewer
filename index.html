@@ -1,33 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Hanzi Viewer</title>
   <style>
     body {
-      font-family: Georgia, serif;
+      font-family: sans-serif;
       text-align: center;
-      background: #f9f4ed;
+      background: #fdf7f0;
+      padding-top: 50px;
     }
     .char-btn {
-      font-size: 32px;
       margin: 10px;
-      padding: 10px;
-      background: #e8dac6;
-      border: none;
+      font-size: 32px;
+      padding: 10px 20px;
       cursor: pointer;
     }
-    #svg-container {
-      margin-top: 30px;
-    }
   </style>
+  <!-- Load Hanzi Writer from CDN -->
+  <script src="https://unpkg.com/hanzi-writer@2.1.2/dist/hanziwriter.min.js"></script>
 </head>
 <body>
+
   <h1>Click a Character to See Stroke Order</h1>
   <div id="buttons"></div>
-  <div id="pinyin" style="font-size: 24px; margin-top: 10px;"></div>
-  <div id="svg-container"></div>
+  <p id="pinyin"></p>
+  <div id="writer" style="margin-top: 30px;"></div>
 
-  <script src="hanzi.js"></script>
+  <!-- Your JavaScript file -->
+  <script src="script.js"></script>
 </body>
 </html>
