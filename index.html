@@ -2,20 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Chinese Stroke Viewer</title>
+  <title>Hanzi Stroke Order Viewer</title>
   <style>
-    body { font-family: "Noto Serif SC", serif; background: #f8f5f0; color: #2e2e2e; text-align: center; padding-top: 40px; }
-    h1 { font-size: 26px; }
-    .char-btn { font-size: 28px; margin: 10px; padding: 10px 15px; background: #e0d4bd; border: none; border-radius: 6px; cursor: pointer; }
-    #svg-container { width: 300px; height: 300px; margin: 20px auto; }
-    #pinyin { font-size: 22px; color: #666; margin-top: 10px; }
+    body {
+      font-family: serif;
+      background: #f8f3ec;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .char-btn {
+      font-size: 28px;
+      padding: 10px 20px;
+      margin: 5px;
+      background: #e6d6bc;
+      border: none;
+      cursor: pointer;
+    }
+
+    #svg-container {
+      margin-top: 30px;
+      height: 300px;
+    }
+
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Click a Character to See Stroke Order </h1>
+  <h1>Click a Character to See Stroke Order</h1>
   <div id="buttons"></div>
-  <div id="pinyin"></div>
+  <div id="pinyin" style="margin-top: 20px; font-size: 24px; color: #444;"></div>
   <div id="svg-container"></div>
+
   <script src="hanzi.js"></script>
 </body>
 </html>
