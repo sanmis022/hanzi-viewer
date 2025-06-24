@@ -17,13 +17,15 @@
       cursor: pointer;
     }
   </style>
-  <!-- Hanzi Writer via CDN -->
+  <!-- ✅ Load Hanzi Writer from CDN -->
   <script src="https://unpkg.com/hanzi-writer@2.1.2/dist/hanziwriter.min.js"></script>
 </head>
 <body>
   <h1>Click a Character to See Stroke Order</h1>
   <div id="buttons"></div>
   <p id="pinyin" style="font-size: 24px;"></p>
+
+  <!-- ✅ This is the missing stroke container -->
   <div id="writer" style="width: 300px; height: 300px; margin: 0 auto;"></div>
 
   <script>
@@ -51,16 +53,19 @@
     function drawCharacter(char) {
       document.getElementById("pinyin").innerText = pinyinMap[char] || "";
 
-      if (writer) writer.hideCharacter();
-      writer = HanziWriter.create('writer', char, {
-        width: 300,
-        height: 300,
-        padding: 5,
-        showOutline: true,
-        showCharacter: false
-      });
-
-      writer.animateCharacter();
+      if (writer) {
+        writer.setCharacter(char);
+        writer.animateCharacter();
+      } else {
+        writer = HanziWriter.create('writer', char, {
+          width: 300,
+          height: 300,
+          padding: 5,
+          showOutline: true,
+          showCharacter: false
+        });
+        writer.animateCharacter();
+      }
     }
 
     window.onload = createButtons;
