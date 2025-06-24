@@ -19,7 +19,7 @@ function createButtons() {
 function drawCharacter(char) {
   const code = char.codePointAt(0).toString(16);
   document.getElementById("pinyin").innerText = pinyinMap[char] || "";
-  fetch(`hanzi-data/$6c38.json`)
+  fetch(`hanzi-data/${code}.json`)
     .then(res => res.json())
     .then(data => {
       const strokes = data.strokes;
