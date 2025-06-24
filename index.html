@@ -1,41 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Hanzi Stroke Order Viewer</title>
+  <meta charset="UTF-8" />
+  <title>Hanzi Viewer</title>
   <style>
     body {
-      font-family: serif;
-      background: #f8f3ec;
+      font-family: Georgia, serif;
       text-align: center;
-      padding: 40px;
+      background: #f9f4ed;
     }
-
     .char-btn {
-      font-size: 28px;
-      padding: 10px 20px;
-      margin: 5px;
-      background: #e6d6bc;
+      font-size: 32px;
+      margin: 10px;
+      padding: 10px;
+      background: #e8dac6;
       border: none;
       cursor: pointer;
     }
-
     #svg-container {
       margin-top: 30px;
-      height: 300px;
-    }
-
-    @keyframes draw {
-      to {
-        stroke-dashoffset: 0;
-      }
     }
   </style>
 </head>
 <body>
   <h1>Click a Character to See Stroke Order</h1>
   <div id="buttons"></div>
-  <div id="pinyin" style="margin-top: 20px; font-size: 24px; color: #444;"></div>
+  <div id="pinyin" style="font-size: 24px; margin-top: 10px;"></div>
   <div id="svg-container"></div>
 
   <script src="hanzi.js"></script>
