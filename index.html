@@ -10,7 +10,7 @@
   <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
 </head>
 <body>
-  <h1>Hanzi Stroke Viewer</h1>
+  <h1>Enter a character below</h1>
   <div style="margin-bottom:20px;">
     <input id="char-input" type="text" maxlength="1" placeholder="Enter character" style="font-size:24px;">
     <button onclick="drawInput()" style="font-size:24px;">Draw</button>
@@ -22,7 +22,7 @@
 
   <script>
     let dictionary = {};
-    const characters = ["你", "好", "永"];
+    const characters = [];
     let writer;
 
     function loadDictionary() {
