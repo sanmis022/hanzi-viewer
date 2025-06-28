@@ -1,9 +1,9 @@
-const pinyinMap = {
-  "你": "nǐ",
-  "好": "hǎo",
-  "永": "yǒng"
+const dictionary = {
+  "你": { pinyin: "nǐ", meaning: "you" },
+  "好": { pinyin: "hǎo", meaning: "good" },
+  "永": { pinyin: "yǒng", meaning: "eternal" }
 };
-const characters = Object.keys(pinyinMap);
+const characters = Object.keys(dictionary);
 
 function createButtons() {
   const container = document.getElementById("buttons");
@@ -16,10 +16,19 @@ function createButtons() {
   });
 }
 
+function drawInput() {
+  const val = document.getElementById('char-input').value.trim();
+  if (val) {
+    drawCharacter(val[0]);
+  }
+}
+
 function drawCharacter(char) {
   const code = char.codePointAt(0).toString(16);
   const filename = code.padStart(4, "0"); // e.g., 6c38
-  document.getElementById("pinyin").innerText = pinyinMap[char] || "";
+  const entry = dictionary[char] || {};
+  document.getElementById("pinyin").innerText = entry.pinyin || "";
+  document.getElementById("meaning").innerText = entry.meaning || "Meaning not found";
 
   fetch(`hanzi-data/${filename}.json`)
     .then(res => res.json())
