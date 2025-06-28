@@ -1,9 +1,11 @@
-const dictionary = {
-  "你": { pinyin: "nǐ", meaning: "you" },
-  "好": { pinyin: "hǎo", meaning: "good" },
-  "永": { pinyin: "yǒng", meaning: "eternal" }
-};
-const characters = Object.keys(dictionary);
+let dictionary = {};
+const characters = ["你", "好", "永"];
+
+function loadDictionary() {
+  return fetch('hanzi-data/cedict_simplified_dict.json')
+    .then(res => res.json())
+    .then(data => { dictionary = data; });
+}
 
 function createButtons() {
   const container = document.getElementById("buttons");
@@ -26,9 +28,10 @@ function drawInput() {
 function drawCharacter(char) {
   const code = char.codePointAt(0).toString(16);
   const filename = code.padStart(4, "0"); // e.g., 6c38
-  const entry = dictionary[char] || {};
-  document.getElementById("pinyin").innerText = entry.pinyin || "";
-  document.getElementById("meaning").innerText = entry.meaning || "Meaning not found";
+  const entry = dictionary[char];
+  document.getElementById("pinyin").innerText = entry ? entry.pinyin : "";
+  const meaning = entry && entry.definitions ? entry.definitions[0] : "Meaning not found";
+  document.getElementById("meaning").innerText = meaning;
 
   fetch(`hanzi-data/${filename}.json`)
     .then(res => res.json())
@@ -55,4 +58,7 @@ function drawCharacter(char) {
     });
 }
 
-window.onload = createButtons;
+window.onload = () => {
+  loadDictionary();
+  createButtons();
+};
