@@ -10,14 +10,23 @@
   <script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
 </head>
 <body>
-  <h1>Click a Character to See Stroke Order</h1>
+  <h1>Hanzi Stroke Viewer</h1>
+  <div style="margin-bottom:20px;">
+    <input id="char-input" type="text" maxlength="1" placeholder="Enter character" style="font-size:24px;">
+    <button onclick="drawInput()" style="font-size:24px;">Draw</button>
+  </div>
   <div id="buttons"></div>
   <p id="pinyin" style="font-size: 24px;"></p>
+  <p id="meaning" style="font-size: 20px; margin: 5px 0;"></p>
   <div id="writer" style="width: 300px; height: 300px; margin: 0 auto;"></div>
 
   <script>
-    const pinyinMap = { "你": "nǐ", "好": "hǎo", "永": "yǒng" };
-    const characters = Object.keys(pinyinMap);
+    const dictionary = {
+      "你": { pinyin: "nǐ", meaning: "you" },
+      "好": { pinyin: "hǎo", meaning: "good" },
+      "永": { pinyin: "yǒng", meaning: "eternal" }
+    };
+    const characters = Object.keys(dictionary);
     let writer;
 
     function createButtons() {
@@ -31,8 +40,17 @@
       });
     }
 
+    function drawInput() {
+      const val = document.getElementById('char-input').value.trim();
+      if (val) {
+        drawCharacter(val[0]);
+      }
+    }
+
     function drawCharacter(char) {
-      document.getElementById("pinyin").innerText = pinyinMap[char];
+      const entry = dictionary[char] || {};
+      document.getElementById("pinyin").innerText = entry.pinyin || '';
+      document.getElementById("meaning").innerText = entry.meaning || 'Meaning not found';
       if (writer) {
         writer.setCharacter(char);
         writer.animateCharacter();
